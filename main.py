@@ -215,7 +215,7 @@ def stop_hotkey_listener():
             hotkey_listener.stop()
         except Exception as e:
             print(f"ホットキーリスナーの停止中にエラー: {e}")
-        traceback.print_exc()
+            traceback.print_exc()
         hotkey_listener = None
 
 def reload_hotkey():
@@ -244,12 +244,11 @@ def run_tkinter_mainloop():
         print("Tkinter mainloop を開始します...")
         try:
             root.mainloop()
-        # mainloopが正常終了した場合（通常はexit_actionでquit/destroyされた場合）
+            # mainloopが正常終了した場合（通常はexit_actionでquit/destroyされた場合）
             print("Tkinter mainloop が終了しました。")
         except Exception as e:
             print(f"Tkinter mainloop でエラーが発生しました: {e}")
             traceback.print_exc() # スタックトレースを詳細に出力
-            messagebox.showerror("エラー", f"Tkinter mainloop でエラーが発生しました:\n{e}", parent=root) # エラーメッセージを表示
         finally:
             print("Tkinter mainloop 処理ブロックを抜けました。")
             # mainloopが終了したら、アプリケーション終了処理へ繋げる必要がある場合がある
@@ -306,18 +305,18 @@ if __name__ == "__main__":
             # ホットキーリスナーを開始
             hotkey_thread = start_hotkey_listener() # スレッドオブジェクトを受け取る
 
-        print("-" * 30)
-        print("スクリーンキャプチャアプリが起動しました。")
-        print(f"タスクトレイアイコンから設定変更、終了が可能です。")
-        if hotkey_listener:
-             print(f"ホットキー '{get_hotkey(config)}' でキャプチャを開始します。")
-        else:
-             print("警告: ホットキーリスナーの起動に失敗しました。")
-        print("-" * 30)
+            print("-" * 30)
+            print("スクリーンキャプチャアプリが起動しました。")
+            print(f"タスクトレイアイコンから設定変更、終了が可能です。")
+            if hotkey_listener:
+                 print(f"ホットキー '{get_hotkey(config)}' でキャプチャを開始します。")
+            else:
+                 print("警告: ホットキーリスナーの起動に失敗しました。")
+            print("-" * 30)
 
             # Tkinterのメインループを開始（設定画面やキャプチャ画面の表示に必要）
             # これが終了するとプログラム全体が終了する
-        run_tkinter_mainloop()
+            run_tkinter_mainloop()
 
     except Exception as e:
         print(f"アプリケーションのメイン処理で予期せぬエラーが発生しました: {e}")
